@@ -1,6 +1,6 @@
 # Rdio Scanner for Home Assistant
 
-A custom Home Assistant integration and dashboard card for a local
+A custom Home Assistant integration for a local
 [Rdio Scanner](https://github.com/chuot/rdio-scanner) server.
 
 Default scanner URL used by the setup form and examples:
@@ -15,15 +15,16 @@ http://192.168.1.49:3000
 - Polls the local Rdio Scanner web UI for availability
 - Optional admin password support for config count sensors
 - Sensors for status, URL, systems, talkgroups, groups, tags, branding, and email
-- Lovelace card that embeds the live Rdio Scanner interface for scanner audio
+- Companion dashboard card available as a separate HACS dashboard repository
 - HACS-ready repository layout
 
 ## Important Note About Audio
 
 Rdio Scanner exposes its live calls and playback controls through its own web
 client. This project does not clone that client or use the reserved WebSocket
-API directly. The custom card embeds the official local Rdio Scanner web UI in
-Home Assistant, so audio playback stays handled by Rdio Scanner itself.
+API directly. The companion dashboard card embeds the official local Rdio
+Scanner web UI in Home Assistant, so audio playback stays handled by Rdio
+Scanner itself.
 
 The Home Assistant integration uses supported HTTP endpoints:
 
@@ -67,16 +68,22 @@ read configuration counts such as systems and talkgroups.
 
 ## Dashboard Card
 
-Copy the card file into Home Assistant:
+The dashboard card now lives in its own HACS dashboard repository:
 
 ```text
-www/rdio-scanner-card.js
+rodgrech/HA-RDIO-SCANNER-CARD
 ```
 
-Add it as a dashboard resource:
+Install it in HACS as a custom repository using category:
 
 ```text
-/local/rdio-scanner-card.js
+Dashboard
+```
+
+HACS resource path:
+
+```text
+/hacsfiles/HA-RDIO-SCANNER-CARD/rdio-scanner-card.js
 ```
 
 Resource type:
@@ -97,7 +104,7 @@ talkgroups_entity: sensor.rdio_scanner_talkgroups
 height: 640
 ```
 
-The same example is available at:
+The same example is still included at:
 
 ```text
 examples/rdio-scanner-card.yaml
