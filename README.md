@@ -1,12 +1,14 @@
 # Rdio Scanner for Home Assistant
 
+![Rdio Scanner logo](assets/hacs-icon.png)
+
 A custom Home Assistant integration for a local
 [Rdio Scanner](https://github.com/chuot/rdio-scanner) server.
 
 Default scanner URL used by the setup form and examples:
 
 ```text
-http://192.168.1.49:3000
+http://rdio-scanner.local:3000
 ```
 
 ## Features
@@ -16,7 +18,25 @@ http://192.168.1.49:3000
 - Optional admin password support for config count sensors
 - Sensors for status, URL, systems, talkgroups, groups, tags, branding, and email
 - Companion dashboard card available as a separate HACS dashboard repository
+- Bundled logo and icon assets for Home Assistant, HACS, and GitHub
 - HACS-ready repository layout
+
+## Branding
+
+Logo and icon assets are included in:
+
+```text
+assets/
+brands/rdio_scanner/
+custom_components/rdio_scanner/icon.png
+custom_components/rdio_scanner/logo.png
+```
+
+The GitHub social preview artwork is available at:
+
+```text
+assets/social-preview.png
+```
 
 ## Important Note About Audio
 
@@ -59,7 +79,7 @@ Then restart Home Assistant.
 4. Enter your scanner URL:
 
 ```text
-http://192.168.1.49:3000
+http://rdio-scanner.local:3000
 ```
 
 The admin password is optional. If you leave it blank, Home Assistant creates
@@ -97,7 +117,7 @@ Example card:
 ```yaml
 type: custom:rdio-scanner-card
 title: Rdio Scanner
-url: http://192.168.1.49:3000
+url: http://rdio-scanner.local:3000
 status_entity: sensor.rdio_scanner_status
 systems_entity: sensor.rdio_scanner_systems
 talkgroups_entity: sensor.rdio_scanner_talkgroups
