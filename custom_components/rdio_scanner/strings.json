@@ -1,0 +1,63 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Rdio Scanner",
+        "description": "Connect to your local Rdio Scanner server. The admin password is optional; add it only if you want config count sensors.",
+        "data": {
+          "url": "Rdio Scanner URL",
+          "password": "Admin password",
+          "scan_interval": "Scan interval"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to Rdio Scanner."
+    },
+    "abort": {
+      "already_configured": "This Rdio Scanner server is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Rdio Scanner options",
+        "description": "Adjust how often Home Assistant polls Rdio Scanner.",
+        "data": {
+          "scan_interval": "Scan interval"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status"
+      },
+      "url": {
+        "name": "URL"
+      },
+      "branding": {
+        "name": "Branding"
+      },
+      "email": {
+        "name": "Email"
+      },
+      "systems": {
+        "name": "Systems"
+      },
+      "talkgroups": {
+        "name": "Talkgroups"
+      },
+      "groups": {
+        "name": "Groups"
+      },
+      "tags": {
+        "name": "Tags"
+      },
+      "admin_configured": {
+        "name": "Admin configured"
+      }
+    }
+  }
+}

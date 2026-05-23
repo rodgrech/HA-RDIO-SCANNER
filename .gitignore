@@ -1,0 +1,3 @@
+.rdio-scanner-source/
+__pycache__/
+*.pyc

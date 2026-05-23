@@ -1,0 +1,11 @@
+{
+  "domain": "rdio_scanner",
+  "name": "Rdio Scanner",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://github.com/rodgrech/HA-RDIO-SCANNER",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/rodgrech/HA-RDIO-SCANNER/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
