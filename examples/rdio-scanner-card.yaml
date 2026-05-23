@@ -1,6 +1,6 @@
 type: custom:rdio-scanner-card
 title: Rdio Scanner
-url: http://rdio-scanner.local:3000
+url: http://rdio.local:3000
 status_entity: sensor.rdio_scanner_status
 systems_entity: sensor.rdio_scanner_systems
 talkgroups_entity: sensor.rdio_scanner_talkgroups

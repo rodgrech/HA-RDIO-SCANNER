@@ -8,7 +8,7 @@ A custom Home Assistant integration for a local
 Default scanner URL used by the setup form and examples:
 
 ```text
-http://rdio-scanner.local:3000
+http://rdio.local:3000
 ```
 
 ## Features
@@ -79,7 +79,7 @@ Then restart Home Assistant.
 4. Enter your scanner URL:
 
 ```text
-http://rdio-scanner.local:3000
+http://rdio.local:3000
 ```
 
 The admin password is optional. If you leave it blank, Home Assistant creates
@@ -117,7 +117,7 @@ Example card:
 ```yaml
 type: custom:rdio-scanner-card
 title: Rdio Scanner
-url: http://rdio-scanner.local:3000
+url: http://rdio.local:3000
 status_entity: sensor.rdio_scanner_status
 systems_entity: sensor.rdio_scanner_systems
 talkgroups_entity: sensor.rdio_scanner_talkgroups
