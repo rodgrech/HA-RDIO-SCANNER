@@ -57,6 +57,9 @@
       },
       "admin_configured": {
         "name": "Admin configured"
+      },
+      "admin_error": {
+        "name": "Admin error"
       }
     }
   }

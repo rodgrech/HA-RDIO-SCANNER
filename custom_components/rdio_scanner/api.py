@@ -25,6 +25,7 @@ class RdioScannerData:
     groups_count: int | None = None
     tags_count: int | None = None
     admin_configured: bool = False
+    admin_error: str | None = None
     raw_config: dict[str, Any] | None = None
 
 
@@ -45,10 +46,16 @@ class RdioScannerClient:
         await self._async_probe_root()
 
         config: dict[str, Any] | None = None
+        admin_error: str | None = None
         if self._admin_password:
-            config = await self._async_fetch_admin_config()
+            try:
+                config = await self._async_fetch_admin_config()
+            except RdioScannerClientError as err:
+                admin_error = str(err)
 
-        return _normalize(self._base_url, config, bool(self._admin_password))
+        return _normalize(
+            self._base_url, config, bool(self._admin_password), admin_error
+        )
 
     async def async_test_connection(self) -> None:
         """Validate that Rdio Scanner can be reached."""
@@ -62,7 +69,9 @@ class RdioScannerClient:
             async with self._session.get(self._base_url, timeout=10) as response:
                 response.raise_for_status()
         except (ClientError, TimeoutError) as err:
-            raise RdioScannerClientError from err
+            raise RdioScannerClientError(
+                f"Unable to reach Rdio Scanner at {self._base_url}: {err}"
+            ) from err
 
     async def _async_fetch_admin_config(self) -> dict[str, Any]:
         """Fetch admin config using Rdio Scanner's supported HTTP admin API."""
@@ -72,13 +81,15 @@ class RdioScannerClient:
             return await self._async_get_config()
         except ClientResponseError as err:
             if err.status != 401:
-                raise RdioScannerClientError from err
+                raise RdioScannerClientError(
+                    f"Unable to fetch admin config: HTTP {err.status}"
+                ) from err
 
             self._token = None
             await self._async_login()
             return await self._async_get_config()
         except (ClientError, TimeoutError, ValueError) as err:
-            raise RdioScannerClientError from err
+            raise RdioScannerClientError(f"Unable to fetch admin config: {err}") from err
 
     async def _async_login(self) -> None:
         """Log in to the admin API and cache the session token."""
@@ -94,7 +105,7 @@ class RdioScannerClient:
                 response.raise_for_status()
                 data = await response.json(content_type=None)
         except (ClientError, TimeoutError, ValueError) as err:
-            raise RdioScannerClientError from err
+            raise RdioScannerClientError(f"Unable to log in to admin API: {err}") from err
 
         token = data.get("token") if isinstance(data, dict) else None
         if not isinstance(token, str) or not token:
@@ -127,7 +138,10 @@ def normalize_url(url: str) -> str:
 
 
 def _normalize(
-    base_url: str, config: dict[str, Any] | None, admin_configured: bool
+    base_url: str,
+    config: dict[str, Any] | None,
+    admin_configured: bool,
+    admin_error: str | None,
 ) -> RdioScannerData:
     """Normalize config data into entity fields."""
     systems = config.get("systems") if config else None
@@ -144,6 +158,7 @@ def _normalize(
         groups_count=len(groups_data) if isinstance(groups_data, list) else None,
         tags_count=len(tags_data) if isinstance(tags_data, list) else None,
         admin_configured=admin_configured,
+        admin_error=admin_error,
         raw_config=config,
     )
 

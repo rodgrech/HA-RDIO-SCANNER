@@ -79,6 +79,12 @@ SENSORS: tuple[RdioScannerSensorDescription, ...] = (
         translation_key="admin_configured",
         value_fn=lambda data: "Yes" if data.admin_configured else "No",
     ),
+    RdioScannerSensorDescription(
+        key="admin_error",
+        name="Admin error",
+        translation_key="admin_error",
+        value_fn=lambda data: data.admin_error,
+    ),
 )
 
 
