@@ -27,6 +27,7 @@ Logo and icon assets are included in:
 
 ```text
 assets/
+brand/
 brands/rdio_scanner/
 custom_components/rdio_scanner/icon.png
 custom_components/rdio_scanner/logo.png
